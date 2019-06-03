@@ -1,0 +1,174 @@
+---
+- !ruby/object:Author
+  name: J.London
+  year: 1876
+  bio: ''
+- !ruby/object:Author
+  name: J.Austen
+  year: 1775
+  bio: ''
+- !ruby/object:Author
+  name: W.Shakespeare
+  year: 1564
+  bio: ''
+- !ruby/object:Author
+  name: L.Tolstoy
+  year: 1828
+  bio: ''
+---
+- !ruby/object:Book
+  name: Moby Dick
+  author: !ruby/object:Author
+    name: J.London
+    year: 1876
+    bio: ''
+  description: ''
+- !ruby/object:Book
+  name: Pride and prejudice
+  author: &1 !ruby/object:Author
+    name: J.Austen
+    year: 1775
+    bio: ''
+  description: ''
+- !ruby/object:Book
+  name: Emma
+  author: *1
+  description: ''
+- !ruby/object:Book
+  name: Hamlet
+  author: !ruby/object:Author
+    name: W.Shakespeare
+    year: 1564
+    bio: ''
+  description: ''
+- !ruby/object:Book
+  name: Anna Karenina
+  author: &2 !ruby/object:Author
+    name: L.Tolstoy
+    year: 1828
+    bio: ''
+  description: ''
+- !ruby/object:Book
+  name: War and Peace
+  author: *2
+  description: ''
+---
+- !ruby/object:Reader
+  name: Olga
+  age: 30
+  address: ''
+  phone: "+380982842194"
+  email: olga.matsuga@gmail.com
+- !ruby/object:Reader
+  name: Vasay
+  age: 25
+  address: ''
+  phone: "+380501111111"
+  email: ''
+- !ruby/object:Reader
+  name: Eva
+  age: 45
+  address: ''
+  phone: "+380501111111"
+  email: ''
+- !ruby/object:Reader
+  name: Tim
+  age: 20
+  address: ''
+  phone: "+380501111111"
+  email: ''
+- !ruby/object:Reader
+  name: Elena
+  age: 35
+  address: ''
+  phone: "+380501111111"
+  email: ''
+- !ruby/object:Reader
+  name: Olga
+  age: 36
+  address: ''
+  phone: "+380982842194"
+  email: olga.matsuga@gmail.com
+---
+- !ruby/object:Order
+  reader: &1 !ruby/object:Reader
+    name: Olga
+    age: 30
+    address: ''
+    phone: "+380982842194"
+    email: olga.matsuga@gmail.com
+  book: &2 !ruby/object:Book
+    name: Moby Dick
+    author: !ruby/object:Author
+      name: J.London
+      year: 1876
+      bio: ''
+    description: ''
+  date: 2019-06-04 01:48:29.776121848 +03:00
+- !ruby/object:Order
+  reader: *1
+  book: &3 !ruby/object:Book
+    name: Anna Karenina
+    author: &4 !ruby/object:Author
+      name: L.Tolstoy
+      year: 1828
+      bio: ''
+    description: ''
+  date: 2018-05-01 00:00:00.000000000 +03:00
+- !ruby/object:Order
+  reader: *1
+  book: !ruby/object:Book
+    name: Emma
+    author: !ruby/object:Author
+      name: J.Austen
+      year: 1775
+      bio: ''
+    description: ''
+  date: 2019-06-04 01:48:29.776146110 +03:00
+- !ruby/object:Order
+  reader: !ruby/object:Reader
+    name: Vasay
+    age: 25
+    address: ''
+    phone: "+380501111111"
+    email: ''
+  book: *2
+  date: 2019-06-04 01:48:29.776147349 +03:00
+- !ruby/object:Order
+  reader: !ruby/object:Reader
+    name: Eva
+    age: 45
+    address: ''
+    phone: "+380501111111"
+    email: ''
+  book: *3
+  date: 2019-06-04 01:48:29.776148365 +03:00
+- !ruby/object:Order
+  reader: &5 !ruby/object:Reader
+    name: Tim
+    age: 20
+    address: ''
+    phone: "+380501111111"
+    email: ''
+  book: !ruby/object:Book
+    name: War and Peace
+    author: *4
+    description: ''
+  date: 2019-06-04 01:48:29.776149584 +03:00
+- !ruby/object:Order
+  reader: *5
+  book: *2
+  date: 2019-06-04 01:48:29.776150519 +03:00
+- !ruby/object:Order
+  reader: *5
+  book: *2
+  date: 2019-06-04 01:48:29.776151592 +03:00
+- !ruby/object:Order
+  reader: !ruby/object:Reader
+    name: Elena
+    age: 35
+    address: ''
+    phone: "+380501111111"
+    email: ''
+  book: *3
+  date: 2019-06-04 01:48:29.776152627 +03:00
