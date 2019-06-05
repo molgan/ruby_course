@@ -1,0 +1,117 @@
+---
+:authors:
+- &1 !ruby/object:Author
+  name: J.London
+  year: 1876
+  bio: withoiut bio
+- &2 !ruby/object:Author
+  name: J.Austen
+  year: 1775
+  bio: ''
+- &3 !ruby/object:Author
+  name: W.Shakespeare
+  year: 1564
+  bio: undefined bio
+- &4 !ruby/object:Author
+  name: L.Tolstoy
+  year: 1828
+  bio: ''
+:books:
+- &6 !ruby/object:Book
+  name: Moby Dick
+  author: *1
+  description: It is a great book
+- !ruby/object:Book
+  name: Pride and prejudice
+  author: *2
+  description: It is very intresting book
+- &8 !ruby/object:Book
+  name: Emma
+  author: *2
+  description: ''
+- !ruby/object:Book
+  name: Hamlet
+  author: *3
+  description: ''
+- &7 !ruby/object:Book
+  name: Anna Karenina
+  author: *4
+  description: ''
+- &12 !ruby/object:Book
+  name: War and Peace
+  author: *4
+  description: It is a great book
+:readers:
+- &5 !ruby/object:Reader
+  name: Olga
+  age: 30
+  address: ''
+  phone: "+380982842194"
+  email: olga.matsuga@gmail.com
+- &9 !ruby/object:Reader
+  name: Vasay
+  age: 25
+  address: ''
+  phone: "+380501111111"
+  email: ''
+- &10 !ruby/object:Reader
+  name: Eva
+  age: 45
+  address: ''
+  phone: "+380501111111"
+  email: ''
+- &11 !ruby/object:Reader
+  name: Tim
+  age: 20
+  address: ''
+  phone: "+380501111111"
+  email: ''
+- &13 !ruby/object:Reader
+  name: Elena
+  age: 35
+  address: ''
+  phone: "+380501111111"
+  email: ''
+- !ruby/object:Reader
+  name: Olga
+  age: 36
+  address: ''
+  phone: "+380982842194"
+  email: olga.matsuga@gmail.com
+:orders:
+- !ruby/object:Order
+  reader: *5
+  book: *6
+  date: 2019-06-05 20:32:59.951564774 +03:00
+- !ruby/object:Order
+  reader: *5
+  book: *7
+  date: 2018-05-01 00:00:00.000000000 +03:00
+- !ruby/object:Order
+  reader: *5
+  book: *8
+  date: 2019-06-05 20:32:59.951584365 +03:00
+- !ruby/object:Order
+  reader: *9
+  book: *6
+  date: 2019-06-05 20:32:59.951585619 +03:00
+- !ruby/object:Order
+  reader: *10
+  book: *7
+  date: 2019-06-05 20:32:59.951586877 +03:00
+- !ruby/object:Order
+  reader: *11
+  book: *12
+  date: 2019-06-05 20:32:59.951587877 +03:00
+- !ruby/object:Order
+  reader: *11
+  book: *6
+  date: 2019-06-05 20:32:59.951589097 +03:00
+- !ruby/object:Order
+  reader: *11
+  book: *6
+  date: 2019-06-05 20:32:59.951590287 +03:00
+- !ruby/object:Order
+  reader: *13
+  book: *7
+  date: 2019-06-05 20:32:59.951591313 +03:00
