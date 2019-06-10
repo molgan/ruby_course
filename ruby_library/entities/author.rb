@@ -1,35 +1,33 @@
 class Author
-    DEFAULT_NAME_RANGE = 3..15
+  DEFAULT_NAME_RANGE = 3..15
 
-    attr_reader :name, :year, :bio
+  attr_reader :name, :year, :bio
 
-    def initialize(name, year, bio='')
-        valid?(name, year)
-        @name = name
-        @year = year
-        @bio = bio
-    end
+  def initialize(name:, year:, bio: '')
+    valid_name?(name)
+    valid_year?(year)
+    @name = name
+		@year = year
+		@bio = bio
+  end
 
-    def to_s
-        "Author { #{@name}, #{@year}. #{@bio} }"
-    end
+  def to_s
+    "Author { #{@name}, #{@year}. #{@bio} }"
+  end
 
-    def ==(other)
-        if other.is_a?(Author)
-            @name == other.name && @year == other.year && @bio == other.bio
-        end
-    end
+  def ==(other)
+    return unless other.is_a?(Author)
+    @name == other.name && @year == other.year && @bio == other.bio
+  end
 
-    private
+  private
 
-    def valid?(name, year)
-        case
-        when !DEFAULT_NAME_RANGE.include?(name.length)
-            raise ArgumentError, "Unvalid name (#{name}). Its length must be in range #{DEFAULT_NAME_RANGE}"
-        when !year.is_a?(Integer)
-            raise TypeError, "Unvalid year class (#{year} is #{year.class}). It must be integer" 
-        when year >= Time.new.year
-            raise ArgumentError, "Unvalid year (#{year}). It must be less than #{Time.new.year}"
-        end
-    end
+  def valid_name?(name)
+    raise InvalidLengthError, DEFAULT_NAME_RANGE unless DEFAULT_NAME_RANGE.include?(name.length)
+  end
+
+  def valid_year?(year)
+    raise IncorrectClassError, Integer unless year.is_a?(Integer)
+    raise InvalidValueError.new('year', "less than #{Time.new.year}") unless year < Time.new.year
+	end
 end

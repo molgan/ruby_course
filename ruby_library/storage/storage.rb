@@ -6,7 +6,6 @@ module Storage
     end
 
     def load_yml(file)
-        return nil unless File.exist?(file)
-        YAML.load(File.open(file))
+        YAML.load(File.open(file)) if File.exist?(file)
     end
 end
