@@ -1,0 +1,36 @@
+---
+:authors:
+- &1 !ruby/object:Author
+  name: J.London
+  year: 1876
+  bio: withoiut bio
+:books:
+- &3 !ruby/object:Book
+  name: Moby Dick
+  author: *1
+  description: It is a great book
+- !ruby/object:Book
+  name: Pride and prejudice
+  author: !ruby/object:Author
+    name: J.Austen
+    year: 1775
+    bio: ''
+  description: It is very intresting book
+:readers:
+- &2 !ruby/object:Reader
+  name: Olga
+  age: 30
+  address: ''
+  phone: "+380982842194"
+  email: olga.matsuga@gmail.com
+- !ruby/object:Reader
+  name: Vasay
+  age: 25
+  address: ''
+  phone: "+380501111111"
+  email: ''
+:orders:
+- !ruby/object:Order
+  reader: *2
+  book: *3
+  date: 2019-06-11 23:39:18.881972241 +03:00
