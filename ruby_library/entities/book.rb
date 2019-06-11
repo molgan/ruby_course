@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# class Book
 class Book
   attr_reader :name, :author, :description
 
@@ -15,13 +18,14 @@ class Book
 
   def ==(other)
     return unless other.is_a?(Book)
+
     @name == other.name && @author == other.author && @description == other.description
   end
 
   private
 
   def valid_name?(name)
-    raise InvalidLengthError, 'positive' unless name.length > 0
+    raise InvalidLengthError, 'positive' unless name.length.positive?
   end
 
   def valid_author?(author)

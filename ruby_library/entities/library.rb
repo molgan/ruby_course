@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# class Library
 class Library
   include Storage
 
@@ -10,11 +13,11 @@ class Library
   end
 
   def to_s
-    "Library\n" + 
-    "Authors:\n\t#{@authors.join("\n\t")}\n" + 
-    "Books:\n\t#{@books.join("\n\t")}\n" +
-    "Readers:\n\t#{@readers.join("\n\t")}\n" + 
-    "Orders:\n\t#{@orders.join("\n\t")}\n"
+    "Library\n" \
+      "Authors:\n\t#{@authors.join("\n\t")}\n" \
+      "Books:\n\t#{@books.join("\n\t")}\n" \
+      "Readers:\n\t#{@readers.join("\n\t")}\n" \
+      "Orders:\n\t#{@orders.join("\n\t")}\n"
   end
 
   def to_h
@@ -30,19 +33,14 @@ class Library
     entities.flatten.each do |entity|
       case entity
       when Author then @authors.push(entity) unless @authors.include?(entity)
-      when Book
-        @books.push(entity) unless @books.include?(entity)
-        @authors.push(entity.author) unless @authors.include?(entity.author)
+      when Book then @books.push(entity) unless @books.include?(entity)
       when Reader then @readers.push(entity) unless @readers.include?(entity)
-      when Order
-        if !@orders.include?(entity) && @readers.include?(entity.reader) && @books.include?(entity.book)
-          @orders.push(entity)
-        end
+      when Order then @orders.push(entity) if !@orders.include?(entity) && correct_order?(entity)
       end
     end
   end
 
-  alias + add
+  alias << add
 
   def save(file)
     save_yml(to_h, file)
@@ -50,12 +48,12 @@ class Library
 
   def load(file)
     data = load_yml(file)
-    if data.is_a?(Hash) && data.keys == [:autors, :books, :readers, :orders]
-      @authors = data[:authors]
-      @books = data[:books]
-      @readers = data[:readers]
-      @orders = data[:orders]
-    end
+    return if !data.is_a?(Hash) || data.keys != %i[autors books readers orders]
+
+    @authors = data[:authors]
+    @books = data[:books]
+    @readers = data[:readers]
+    @orders = data[:orders]
   end
 
   def top_book
@@ -63,11 +61,13 @@ class Library
   end
 
   def top_books(number = 3)
-    top_entities(number, :@book)
+    grouped_orders = @orders.group_by(&:book)
+    (grouped_orders.keys.sort_by { |key| -grouped_orders[key].length })[0, number]
   end
 
   def top_readers(number = 3)
-    top_entities(number, :@reader)
+    grouped_orders = @orders.group_by(&:reader)
+    (grouped_orders.keys.sort_by { |key| -grouped_orders[key].length })[0, number]
   end
 
   def count_of_top_books_readers(number = 3)
@@ -77,8 +77,7 @@ class Library
 
   private
 
-  def top_entities(number = 3, entity)
-    grouped_entities = @orders.group_by { |order| order.instance_variable_get(entity) }
-    (grouped_entities.keys.sort_by{ |key| -grouped_entities[key].length})[0, number]
+  def correct_order?(order)
+    @readers.include?(order.reader) && @books.include?(order.book)
   end
 end

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# class Order
 class Order
   attr_reader :reader, :book, :date
 
@@ -8,14 +11,15 @@ class Order
     @reader = reader
     @book = book
     @date = date
-   end
+  end
 
-   def to_s
-    "Order { reader: #{@reader.name}, book: #{@book.name}, date: #{@date.strftime("%d-%m-%Y")} }"
+  def to_s
+    "Order { reader: #{@reader.name}, book: #{@book.name}, date: #{@date.strftime('%d-%m-%Y')} }"
   end
 
   def ==(other)
     return unless other.is_a?(Order)
+
     @reader == other.reader && @book == other.book && @date == other.date
   end
 
@@ -32,4 +36,4 @@ class Order
   def valid_date?(date)
     raise IncorrectClassError, Time unless date.is_a?(Time)
   end
-end 
+end

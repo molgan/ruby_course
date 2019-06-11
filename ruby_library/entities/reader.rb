@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# class Reader
 class Reader
   DEFAULT_MIN_AGE = 18
-  DEFAULT_PHONE = /^\+[\d]*$/
+  DEFAULT_PHONE = /^\+[\d]*$/.freeze
 
   attr_reader :name, :age, :address, :phone, :email
 
@@ -18,17 +21,18 @@ class Reader
   def to_s
     "Reader { #{@name}, age: #{@age}, address: #{@address}, phone: #{@phone}, email: #{@email} }"
   end
-    
+
   def ==(other)
     return unless other.is_a?(Reader)
-    @name == other.name && @age == other.age && @address == other.address && 
-    @phone == other.phone && @email == other.email
+
+    @name == other.name && @age == other.age && @address == other.address &&
+      @phone == other.phone && @email == other.email
   end
 
   private
 
   def valid_name?(name)
-    raise InvalidLengthError, 'positive' unless name.length > 0
+    raise InvalidLengthError, 'positive' unless name.length.positive?
   end
 
   def valid_age?(age)

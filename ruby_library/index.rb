@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'storage/storage'
 require_relative 'errors/errors'
 require_relative 'entities/author'
@@ -6,16 +8,14 @@ require_relative 'entities/reader'
 require_relative 'entities/order'
 require_relative 'entities/library'
 
-def test_exception (&block) 
-    begin
-        block.call
-    rescue IncorrectClassError, InvalidLengthError, InvalidValueError => e
-        puts e.message
-    end
+def test_exception(&block)
+  block.call
+rescue IncorrectClassError, InvalidLengthError, InvalidValueError => e
+  puts e.message
 end
 
 def puts_title(title)
-    puts "\n" + '='*10 + title + '='*10
+  puts "\n" + '=' * 10 + title + '=' * 10
 end
 
 puts_title('Check unvalid arguments')
@@ -44,7 +44,7 @@ puts
 test_exception { Order.new(reader: 'reader', book: 'book') }
 test_exception { Order.new(reader: reader, book: 'book') }
 test_exception { Order.new(reader: reader, book: book, date: '2019-06-01') }
-order = Order.new(reader: reader, book: book, date: Time.new(2019, 06, 01))
+order = Order.new(reader: reader, book: book, date: Time.new(2019, 6, 1))
 puts "Valid order: #{order}"
 order = Order.new(reader: reader, book: book)
 puts "Valid order: #{order}"
@@ -63,8 +63,7 @@ author4 = Author.new(name: 'L.Tolstoy', year: 1828)
 book1 = Book.new(name: 'Moby Dick', author: author1, description: 'It is a great book')
 book2 = Book.new(name: 'Pride and prejudice', author: author2, description: 'It is very intresting book')
 book3 = Book.new(name: 'Emma', author: author2)
-book3 = Book.new(name: 'Emma', author: author2)
-book4 = Book.new(name: 'Hamlet', author:author3)
+book4 = Book.new(name: 'Hamlet', author: author3)
 book5 = Book.new(name: 'Anna Karenina', author: author4)
 book6 = Book.new(name: 'War and Peace', author: author4, description: 'It is a great book')
 
@@ -87,7 +86,10 @@ order8 = Order.new(reader: reader4, book: book1)
 order9 = Order.new(reader: reader5, book: book5)
 
 puts_title('Create library with some unvalid entities')
-library = Library.new(authors: [author1, ''], books: [book1, book2], readers: [reader1, reader2], orders: [order1, order2])
+library = Library.new(authors: [author1, ''],
+                      books: [book1, book2],
+                      readers: [reader1, reader2],
+                      orders: [order1, order2])
 puts library
 puts
 
@@ -96,18 +98,18 @@ library.save('data/library1.yml')
 puts
 
 puts_title('Library after adding some new entities')
-library + author3
+library << author3
 library.add(author4)
 library.add(book3, book4)
 library.add([book5, book6])
 library.add(reader3, reader4, reader5)
 library.add(reader6, reader7, order2, order3)
-library + order4
-library + order5
-library + order6
-library + order7
-library + order8
-library + order9
+library << order4
+library << order5
+library << order6
+library << order7
+library << order8
+library << order9
 puts library
 puts
 
@@ -130,9 +132,9 @@ library.load('library1.yml')
 puts_title('Statistics for library')
 puts "The most popular book: #{library.top_book.name}"
 puts 'The 3 most popular books:'
-library.top_books.each { |book| puts "#{book.name}"}
+library.top_books.each { |top_book| puts top_book.name }
 puts 'The 3 most popular readers:'
-library.top_readers.each { |reader| puts "#{reader.name}"}
+library.top_readers.each { |top_reader| puts top_reader.name }
 puts "Count of the 3 most popular books readers: #{library.count_of_top_books_readers}"
 puts "Count of the 2 most popular books readers: #{library.count_of_top_books_readers(2)}"
 puts "Count of the 1 most popular books readers: #{library.count_of_top_books_readers(1)}"
